@@ -59,18 +59,16 @@ public class DateFormatMethodExecutor implements MethodExecutor {
 				//Assume it's in default formay yyyMMdd
 				SimpleDateFormat fromFormat = new SimpleDateFormat(DEFAULT_FORMAT);
 				//if the third argument is present, use it as the from date format
-				if (arguments.length == 3 && arguments[2] instanceof String) {
+				if (arguments.length == 3 && arguments[2] instanceof String) 
 					fromFormat = new SimpleDateFormat((String)arguments[2]);
+				
 					try {
 						Date parsedDate = fromFormat.parse((String) arguments[1]);
 						return new TypedValue(format.format(parsedDate));
 					} catch (ParseException e) {
 						throw new AccessException("Unable to format", e);
 					}
-				}
-				else {
-					throw new AccessException("Unable to format");
-				}
+				
 			}
 
 			return new TypedValue(format.format((Long)arguments[1]));
